@@ -1,0 +1,7 @@
+flask
+requests
+opencv-python-headless
+pytesseract
+spacy
+google-search-results
+yt-dlp
