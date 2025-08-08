@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Instagram Reel Location Finder</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fdfaf6;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #444;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #map {
+      height: 400px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    #location-text {
+      margin-top: 15px;
+      padding: 10px;
+      background: #f1f1f1;
+      border-radius: 6px;
+      font-size: 1rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Instagram Reel Location Finder</h1>
+    <input type="text" id="reel-url" placeholder="Paste Instagram Reel URL here" />
+    <button onclick="fetchLocation()">Find Location</button>
+    
+    <div id="location-text">Location will appear here...</div>
+    <div id="map"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([20.5937, 78.9629], 4);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+    }).addTo(map);
+
+    let marker;
+
+    function fetchLocation() {
+        const url = document.getElementById('reel-url').value;
+        const locationText = document.getElementById('location-text');
+        locationText.innerHTML = "Searching..."; // Clear previous content
+        
+        fetch('/get_location', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ reel_url: url })
+        })
+        .then(res => res.json())
+        .then(data => {
+            let displayText = data.location_text;
+            
+            // Add maps link if available
+            if (data.maps_url) {
+                displayText += `<br><a href="${data.maps_url}" target="_blank">View on Google Maps</a>`;
+            }
+            
+            // Add address if available
+            if (data.address) {
+                displayText += `<br>${data.address}`;
+            }
+            
+            locationText.innerHTML = displayText;
+
+            if (marker) map.removeLayer(marker);
+            
+            if (data.lat && data.lon) {
+                marker = L.marker([data.lat, data.lon]).addTo(map)
+                    .bindPopup(data.location_text)
+                    .openPopup();
+                map.setView([data.lat, data.lon], 15);
+            } else if (data.maps_url) {
+                // If no coordinates but have maps link, show a message
+                locationText.innerHTML += "<br>Could not get precise coordinates, but here's the map link";
+            }
+        })
+        .catch(err => {
+            locationText.innerHTML = "Failed to fetch location.";
+            console.error(err);
+        });
+    }
+</script>
+</body>
+</html>
