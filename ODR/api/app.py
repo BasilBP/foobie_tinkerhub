@@ -1,23 +1,7 @@
-import subprocess
-import sys
-
-def download_spacy_model():
-    try:
-        import spacy
-        return spacy.load("en_core_web_sm")
-    except OSError:
-        subprocess.check_call([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
-        import spacy
-        return spacy.load("en_core_web_sm")
-
-nlp = download_spacy_model()
-
 from flask import Flask, request, jsonify, send_file
 import subprocess
 import os
 import json
-import cv2
-import pytesseract
 import requests
 import tempfile
 import spacy
@@ -32,7 +16,14 @@ SERPAPI_KEY = "9184855c3a7f4401806ebdc8ba1c35bf169b449c808d6bf9baca859376d1b4e5"
 GOOGLE_MAPS_API_KEY = "AIzaSyC9v39XIK9P-uzJCmvAN1OK7AUGyvxZUH0"
 OPENCAGE_API_KEY = "048fafc1e4cf46e7adc98464f21bcae5"
 app = Flask(__name__)
-nlp = download_spacy_model()
+# Handle SpaCy model for Vercel
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    import sys, subprocess
+    subprocess.run([sys.executable, "-m", "spacy", "download", "en_core_web_sm"], check=True)
+    nlp = spacy.load("en_core_web_sm")
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -157,29 +148,6 @@ def extract_description(url):
         return info.get("description", "")
     except Exception as e:
         logger.error(f"Error extracting description: {e}")
-        return ""
-
-def extract_video_text(video_path):
-    """Extract text from video frames using OCR."""
-    try:
-        cap = cv2.VideoCapture(video_path)
-        text_found = set()
-        frame_count = 0
-        while True:
-            ret, frame = cap.read()
-            if not ret:
-                break
-            if frame_count % 30 == 0:
-                gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-                text = pytesseract.image_to_string(gray)
-                if text.strip():
-                    text_found.add(text.strip())
-            frame_count += 1
-        cap.release()
-        logger.info(f"Extracted {len(text_found)} unique text snippets from video")
-        return " ".join(text_found)
-    except Exception as e:
-        logger.error(f"Error extracting video text: {e}")
         return ""
 
 def extract_location_name(text):
@@ -419,9 +387,8 @@ def get_location():
             video_path = os.path.join(tmpdir, "reel.mp4")
             download_reel(reel_url, video_path)
             description = extract_description(reel_url)
-            video_text = extract_video_text(video_path)
-            combined_text = f"{description}\n{video_text}"
-            logger.info(f"Combined text: {combined_text}")
+            combined_text = description
+            logger.info(f"Description text: {combined_text}")
 
             lines = combined_text.splitlines()
             location_block = None
@@ -524,6 +491,3 @@ def get_location():
             response['maps_url'] = finalize_maps_url(response['maps_url'])
             logger.info(f"map-link: {response['maps_url']}")
             return jsonify(response)
-
-"""if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=True)"""
