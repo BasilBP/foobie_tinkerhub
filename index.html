@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fitmeal - Healthy Food & Nutrition</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <style>
         /* Reset and Base Styles */
         * {
@@ -687,6 +688,151 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        /* Food Spots Sidebar */
+        .food-spots-sidebar {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            border-radius: 50% 0 0 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .food-spots-sidebar.expanded {
+            width: 350px;
+            height: 80vh;
+            border-radius: 10px 0 0 10px;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .food-spots-sidebar.expanded .sidebar-icon {
+            display: none;
+        }
+
+        .sidebar-icon {
+            font-size: 24px;
+        }
+
+        .sidebar-content {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .food-spots-sidebar.expanded .sidebar-content {
+            display: block;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .close-sidebar {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .sidebar-map {
+            height: 60%;
+            width: 100%;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        #foodSpotsMap {
+            height: 100%;
+            width: 100%;
+        }
+
+        .sidebar-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .sidebar-btn {
+            padding: 8px 15px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .sidebar-btn.active {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        .food-spots-list {
+            max-height: 25%;
+            overflow-y: auto;
+        }
+
+        .food-spot-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .food-spot-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .food-spot-icon {
+            margin-right: 10px;
+            color: white;
+        }
+
+        .food-spot-info {
+            flex: 1;
+        }
+
+        .food-spot-name {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+
+        .food-spot-distance {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
         /* Responsive Styles */
         @media (max-width: 992px) {
             .hero-content h1 {
@@ -742,6 +888,11 @@
             .section-title h2 {
                 font-size: 30px;
             }
+
+            .food-spots-sidebar.expanded {
+                width: 300px;
+                height: 70vh;
+            }
         }
 
         @media (max-width: 576px) {
@@ -756,535 +907,711 @@
             .hero-content {
                 text-align: center;
             }
+
+            .food-spots-sidebar.expanded {
+                width: 280px;
+                height: 60vh;
+            }
         }
     </style>
 </head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container header-container">
-            <a href="#" class="logo">Fit<span>meal</span></a>
-            
-            <nav class="nav">
-                <ul class="nav-menu">
-                    <li><a href="#home" class="active">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#menu">Menu</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#team">Team</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-            
-            <div class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
+    <body>
+        <!-- Food Spots Sidebar -->
+        <div class="food-spots-sidebar">
+            <div class="sidebar-icon">
+                <i class="fas fa-map-marker-alt"></i>
             </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Healthy Food For Your Body</h1>
-                <p>We provide healthy food for your family. Our service is a great way to get healthy food delivered to your door.</p>
-                <div class="hero-btns">
-                    <a href="#" class="btn">View Menu</a>
-                    <a href="#" class="btn btn-outline">Book a Table</a>
+            <div class="sidebar-content">
+                <div class="sidebar-header">
+                    <div class="sidebar-title">My Food Spots</div>
+                    <button class="close-sidebar">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="sidebar-map">
+                    <div id="foodSpotsMap"></div>
+                </div>
+                <div class="sidebar-controls">
+                    <button class="sidebar-btn active" id="showAllBtn">All Spots</button>
+                    <button class="sidebar-btn" id="nearMeBtn">Near Me</button>
+                </div>
+                <div class="food-spots-list" id="foodSpotsList">
+                    <!-- Food spots will be added here dynamically -->
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Us</h2>
-                <p>We provide healthy food for your family. Our service is a great way to get healthy food delivered to your door.</p>
-            </div>
-            
-            <div class="about-container">
-                <div class="about-img">
-                    <img src="https://via.placeholder.com/600x600" alt="About Us">
-                </div>
+        <!-- Header -->
+        <header class="header">
+            <div class="container header-container">
+                <a href="#" class="logo">Reel<span>Bites</span></a>
                 
-                <div class="about-content">
-                    <h2>We Provide Healthy Food For Your Family</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
-                    
-                    <div class="about-features">
-                        <div class="about-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <div>
-                                <h3>Fresh Ingredients</h3>
-                                <p>We use only the freshest ingredients for our dishes.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="about-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <div>
-                                <h3>Professional Chefs</h3>
-                                <p>Our chefs are highly trained and experienced.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="about-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <div>
-                                <h3>Organic Food</h3>
-                                <p>We source organic ingredients whenever possible.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Services</h2>
-                <p>We provide healthy food for your family. Our service is a great way to get healthy food delivered to your door.</p>
-            </div>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-utensils"></i>
-                    <h3>Healthy Meals</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </div>
-                
-                <div class="service-card">
-                    <i class="fas fa-truck"></i>
-                    <h3>Fast Delivery</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </div>
-                
-                <div class="service-card">
-                    <i class="fas fa-heartbeat"></i>
-                    <h3>Nutrition Plans</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Menu Section -->
-    <section class="menu" id="menu">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Menu</h2>
-                <p>We provide healthy food for your family. Our service is a great way to get healthy food delivered to your door.</p>
-            </div>
-            
-            <div class="menu-tabs">
-                <div class="menu-tab active" data-category="all">All</div>
-                <div class="menu-tab" data-category="breakfast">Breakfast</div>
-                <div class="menu-tab" data-category="lunch">Lunch</div>
-                <div class="menu-tab" data-category="dinner">Dinner</div>
-                <div class="menu-tab" data-category="desserts">Desserts</div>
-                <div class="menu-tab" data-category="drinks">Drinks</div>
-            </div>
-            
-            <div class="menu-items">
-                <div class="menu-item" data-category="breakfast">
-                    <div class="menu-item-img">
-                        <img src="https://via.placeholder.com/120x120" alt="Breakfast Item">
-                    </div>
-                    <div class="menu-item-content">
-                        <div class="menu-item-header">
-                            <h3 class="menu-item-title">Avocado Toast</h3>
-                            <span class="menu-item-price">$12.99</span>
-                        </div>
-                        <p class="menu-item-desc">Fresh avocado on whole grain toast with cherry tomatoes and feta cheese.</p>
-                    </div>
-                </div>
-                
-                <div class="menu-item" data-category="lunch">
-                    <div class="menu-item-img">
-                        <img src="https://via.placeholder.com/120x120" alt="Lunch Item">
-                    </div>
-                    <div class="menu-item-content">
-                        <div class="menu-item-header">
-                            <h3 class="menu-item-title">Quinoa Salad</h3>
-                            <span class="menu-item-price">$14.99</span>
-                        </div>
-                        <p class="menu-item-desc">Fresh quinoa with mixed greens, cherry tomatoes, cucumber, and lemon dressing.</p>
-                    </div>
-                </div>
-                
-                <div class="menu-item" data-category="dinner">
-                    <div class="menu-item-img">
-                        <img src="https://via.placeholder.com/120x120" alt="Dinner Item">
-                    </div>
-                    <div class="menu-item-content">
-                        <div class="menu-item-header">
-                            <h3 class="menu-item-title">Grilled Salmon</h3>
-                            <span class="menu-item-price">$22.99</span>
-                        </div>
-                        <p class="menu-item-desc">Freshly grilled salmon with roasted vegetables and quinoa.</p>
-                    </div>
-                </div>
-                
-                <div class="menu-item" data-category="desserts">
-                    <div class="menu-item-img">
-                        <img src="https://via.placeholder.com/120x120" alt="Dessert Item">
-                    </div>
-                    <div class="menu-item-content">
-                        <div class="menu-item-header">
-                            <h3 class="menu-item-title">Chia Pudding</h3>
-                            <span class="menu-item-price">$8.99</span>
-                        </div>
-                        <p class="menu-item-desc">Chia seeds soaked in almond milk with fresh berries and honey.</p>
-                    </div>
-                </div>
-                
-                <div class="menu-item" data-category="drinks">
-                    <div class="menu-item-img">
-                        <img src="https://via.placeholder.com/120x120" alt="Drink Item">
-                    </div>
-                    <div class="menu-item-content">
-                        <div class="menu-item-header">
-                            <h3 class="menu-item-title">Green Smoothie</h3>
-                            <span class="menu-item-price">$6.99</span>
-                        </div>
-                        <p class="menu-item-desc">Spinach, kale, banana, almond milk, and chia seeds blended to perfection.</p>
-                    </div>
-                </div>
-                
-                <div class="menu-item" data-category="breakfast">
-                    <div class="menu-item-img">
-                        <img src="https://via.placeholder.com/120x120" alt="Breakfast Item">
-                    </div>
-                    <div class="menu-item-content">
-                        <div class="menu-item-header">
-                            <h3 class="menu-item-title">Acai Bowl</h3>
-                            <span class="menu-item-price">$10.99</span>
-                        </div>
-                        <p class="menu-item-desc">Acai berry blend topped with granola, banana, and coconut flakes.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2>Testimonials</h2>
-                <p>What our customers say about us</p>
-            </div>
-            
-            <div class="testimonial-slider">
-                <div class="testimonial-item">
-                    <i class="fas fa-quote-left"></i>
-                    <p class="testimonial-text">The food was absolutely delicious! I've been ordering from Fitmeal for months now and I can honestly say it's changed my eating habits for the better. The meals are always fresh and full of flavor.</p>
-                    <div class="testimonial-author">
-                        Sarah Johnson
-                        <span>Regular Customer</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Team Section -->
-    <section class="team" id="team">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Team</h2>
-                <p>Meet our professional chefs</p>
-            </div>
-            
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="team-member-img">
-                        <img src="https://via.placeholder.com/300x300" alt="Chef">
-                    </div>
-                    <div class="team-member-info">
-                        <h3 class="team-member-name">Michael Smith</h3>
-                        <p class="team-member-role">Head Chef</p>
-                        <div class="team-member-social">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="team-member">
-                    <div class="team-member-img">
-                        <img src="https://via.placeholder.com/300x300" alt="Chef">
-                    </div>
-                    <div class="team-member-info">
-                        <h3 class="team-member-name">Emily Davis</h3>
-                        <p class="team-member-role">Nutritionist</p>
-                        <div class="team-member-social">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="team-member">
-                    <div class="team-member-img">
-                        <img src="https://via.placeholder.com/300x300" alt="Chef">
-                    </div>
-                    <div class="team-member-info">
-                        <h3 class="team-member-name">David Wilson</h3>
-                        <p class="team-member-role">Sous Chef</p>
-                        <div class="team-member-social">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Contact Us</h2>
-                <p>Get in touch with us for any questions</p>
-            </div>
-            
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <p>Feel free to contact us for any questions or reservations.</p>
-                    
-                    <div class="contact-info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Address</h4>
-                            <p>123 Healthy Street, Nutrition City, 12345</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-info-item">
-                        <i class="fas fa-phone-alt"></i>
-                        <div>
-                            <h4>Phone</h4>
-                            <p>+1 234 567 890</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-info-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <p>info@fitmeal.com</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="email" placeholder="Your Email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" placeholder="Subject">
-                        </div>
-                        
-                        <div class="form-group">
-                            <textarea placeholder="Your Message" required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-container">
-                <div class="footer-col">
-                    <h3>About Us</h3>
-                    <p>Fitmeal is a healthy food restaurant that provides nutritious and delicious meals for your family.</p>
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
+                <nav class="nav">
+                    <ul class="nav-menu">
+                        <li><a href="#home" class="active">Home</a></li>
+                        <li><a href="#about">About</a></li>
                         <li><a href="#services">Services</a></li>
                         <li><a href="#menu">Menu</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#team">Team</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
-                </div>
+                </nav>
                 
-                <div class="footer-col">
-                    <h3>Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Healthy Meals</a></li>
-                        <li><a href="#">Fast Delivery</a></li>
-                        <li><a href="#">Nutrition Plans</a></li>
-                        <li><a href="#">Catering</a></li>
-                        <li><a href="#">Cooking Classes</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>Contact Info</h3>
-                    <ul class="footer-contact-info">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>123 Healthy Street, Nutrition City, 12345</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone-alt"></i>
-                            <span>+1 234 567 890</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <span>info@fitmeal.com</span>
-                        </li>
-                    </ul>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
                 </div>
             </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2023 Fitmeal. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
+        </header>
 
-    <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('.nav-menu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
-                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        });
-        
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-menu li a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <h1><b>"Scroll it. Spot it. Nosh it."</b></h1>
+                    <p>We provide healthy food for your family. Our service is a great way to get healthy food delivered to your door.</p>
+                    <div class="hero-btns">
+                        <a href="#" class="btn">View Menu</a>
+                        <a href="#" class="btn btn-outline">Book a Table</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="container">
+                <div class="section-title">
+                    <h2>About Us</h2>
+                    <pre> At ReelBites, we’ve cracked the code on food discovery—no more endless scrolling or "where should we eat?" debates. We fuse addictive short videos with real-time food spot magic, so every swipe serves up your next favorite meal.
+
+                        Scroll. Drool. Go.</pre>
+                </div>
+                
+                <div class="about-container">
+                    <div class="about-img">
+                        <img src="https://via.placeholder.com/600x600" alt="About Us">
+                    </div>
+                    
+                    <div class="about-content">
+                        <h2>We Provide Healthy Food For Your Family</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+                        
+                        <div class="about-features">
+                            <div class="about-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <h3>Instant Discovery</h3>
+                                    <p>No more Googling or switching apps—find food spots while you watch.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="about-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <h3>Professional Chefs</h3>
+                                    <p>Our chefs are highly trained and experienced.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="about-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <h3>Organic Food</h3>
+                                    <p>We source organic ingredients whenever possible.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services" id="services">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Services</h2>
+                    <p>We provide healthy food for your family. Our service is a great way to get healthy food delivered to your door.</p>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-utensils"></i>
+                        <h3>Healthy Meals</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <i class="fas fa-truck"></i>
+                        <h3> Reel-to-Location</h3>
+                        <pre><b>Upload. Analyze. Locate.</b>
+                            Upload your Instagram Reel, and our smart AI analyzes visual, audio, and metadata cues to detect the exact food spot location.</pre>
+                       
+                    </div>
+                    
+                    <div class="service-card">
+                        <i class="fas fa-heartbeat"></i>
+                        <h3>Nutrition Plans</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section class="menu" id="menu">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Menu</h2>
+                    <p>We provide healthy food for your family. Our service is a great way to get healthy food delivered to your door.</p>
+                </div>
+                
+                <div class="menu-tabs">
+                    <div class="menu-tab active" data-category="all">All</div>
+                    <div class="menu-tab" data-category="breakfast">Breakfast</div>
+                    <div class="menu-tab" data-category="lunch">Lunch</div>
+                    <div class="menu-tab" data-category="dinner">Dinner</div>
+                    <div class="menu-tab" data-category="desserts">Desserts</div>
+                    <div class="menu-tab" data-category="drinks">Drinks</div>
+                </div>
+                
+                <div class="menu-items">
+                    <div class="menu-item" data-category="breakfast">
+                        <div class="menu-item-img">
+                            <img src="https://via.placeholder.com/120x120" alt="Breakfast Item">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Avocado Toast</h3>
+                                <span class="menu-item-price">$12.99</span>
+                            </div>
+                            <p class="menu-item-desc">Fresh avocado on whole grain toast with cherry tomatoes and feta cheese.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item" data-category="lunch">
+                        <div class="menu-item-img">
+                            <img src="https://via.placeholder.com/120x120" alt="Lunch Item">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Quinoa Salad</h3>
+                                <span class="menu-item-price">$14.99</span>
+                            </div>
+                            <p class="menu-item-desc">Fresh quinoa with mixed greens, cherry tomatoes, cucumber, and lemon dressing.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item" data-category="dinner">
+                        <div class="menu-item-img">
+                            <img src="https://via.placeholder.com/120x120" alt="Dinner Item">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Grilled Salmon</h3>
+                                <span class="menu-item-price">$22.99</span>
+                            </div>
+                            <p class="menu-item-desc">Freshly grilled salmon with roasted vegetables and quinoa.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item" data-category="desserts">
+                        <div class="menu-item-img">
+                            <img src="https://via.placeholder.com/120x120" alt="Dessert Item">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Chia Pudding</h3>
+                                <span class="menu-item-price">$8.99</span>
+                            </div>
+                            <p class="menu-item-desc">Chia seeds soaked in almond milk with fresh berries and honey.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item" data-category="drinks">
+                        <div class="menu-item-img">
+                            <img src="https://via.placeholder.com/120x120" alt="Drink Item">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Green Smoothie</h3>
+                                <span class="menu-item-price">$6.99</span>
+                            </div>
+                            <p class="menu-item-desc">Spinach, kale, banana, almond milk, and chia seeds blended to perfection.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item" data-category="breakfast">
+                        <div class="menu-item-img">
+                            <img src="https://via.placeholder.com/120x120" alt="Breakfast Item">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Acai Bowl</h3>
+                                <span class="menu-item-price">$10.99</span>
+                            </div>
+                            <p class="menu-item-desc">Acai berry blend topped with granola, banana, and coconut flakes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Testimonials</h2>
+                    <p>What our customers say about us</p>
+                </div>
+                
+                <div class="testimonial-slider">
+                    <div class="testimonial-item">
+                        <i class="fas fa-quote-left"></i>
+                        <p class="testimonial-text">The food was absolutely delicious! I've been ordering from Fitmeal for months now and I can honestly say it's changed my eating habits for the better. The meals are always fresh and full of flavor.</p>
+                        <div class="testimonial-author">
+                            Sarah Johnson
+                            <span>Regular Customer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team" id="team">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Team</h2>
+                    <p>Meet our professional chefs</p>
+                </div>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="team-member-img">
+                            <img src="https://via.placeholder.com/300x300" alt="Chef">
+                        </div>
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Michael Smith</h3>
+                            <p class="team-member-role">Head Chef</p>
+                            <div class="team-member-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="team-member-img">
+                            <img src="https://via.placeholder.com/300x300" alt="Chef">
+                        </div>
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Emily Davis</h3>
+                            <p class="team-member-role">Nutritionist</p>
+                            <div class="team-member-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="team-member-img">
+                            <img src="https://via.placeholder.com/300x300" alt="Chef">
+                        </div>
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">David Wilson</h3>
+                            <p class="team-member-role">Sous Chef</p>
+                            <div class="team-member-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Contact Us</h2>
+                    <p>Get in touch with us for any questions</p>
+                </div>
+                
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        <p>Feel free to contact us for any questions or reservations.</p>
+                        
+                        <div class="contact-info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Address</h4>
+                                <p>123 Healthy Street, Nutrition City, 12345</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+1 234 567 890</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@fitmeal.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" placeholder="Your Name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="email" placeholder="Your Email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" placeholder="Subject">
+                            </div>
+                            
+                            <div class="form-group">
+                                <textarea placeholder="Your Message" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-container">
+                    <div class="footer-col">
+                        <h3>About Us</h3>
+                        <p>Fitmeal is a healthy food restaurant that provides nutritious and delicious meals for your family.</p>
+                        <div class="footer-social">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#menu">Menu</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h3>Services</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Healthy Meals</a></li>
+                            <li><a href="#">Fast Delivery</a></li>
+                            <li><a href="#">Nutrition Plans</a></li>
+                            <li><a href="#">Catering</a></li>
+                            <li><a href="#">Cooking Classes</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h3>Contact Info</h3>
+                        <ul class="footer-contact-info">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>123 Healthy Street, Nutrition City, 12345</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>+1 234 567 890</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>info@fitmeal.com</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2023 Fitmeal. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+        <script>
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
             });
-        });
-        
-        // Sticky Header
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            header.classList.toggle('scrolled', window.scrollY > 50);
-        });
-        
-        // Menu Filter
-        const menuTabs = document.querySelectorAll('.menu-tab');
-        const menuItems = document.querySelectorAll('.menu-item');
-        
-        menuTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Remove active class from all tabs
-                menuTabs.forEach(t => t.classList.remove('active'));
-                // Add active class to clicked tab
-                tab.classList.add('active');
-                
-                const category = tab.dataset.category;
-                
-                // Filter menu items
-                menuItems.forEach(item => {
-                    if (category === 'all' || item.dataset.category === category) {
-                        item.style.display = 'flex';
-                    } else {
-                        item.style.display = 'none';
+            
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-menu li a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            
+            // Sticky Header
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('.header');
+                header.classList.toggle('scrolled', window.scrollY > 50);
+            });
+            
+            // Menu Filter
+            const menuTabs = document.querySelectorAll('.menu-tab');
+            const menuItems = document.querySelectorAll('.menu-item');
+            
+            menuTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    menuTabs.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+                    
+                    const category = tab.dataset.category;
+                    
+                    // Filter menu items
+                    menuItems.forEach(item => {
+                        if (category === 'all' || item.dataset.category === category) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Smooth Scrolling for Anchor Links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
                     }
                 });
             });
-        });
-        
-        // Smooth Scrolling for Anchor Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+            
+            // Simple Testimonial Slider
+            const testimonials = [
+                {
+                    text: "The food was absolutely delicious! I've been ordering from Fitmeal for months now and I can honestly say it's changed my eating habits for the better. The meals are always fresh and full of flavor.",
+                    author: "Sarah Johnson",
+                    role: "Regular Customer"
+                },
+                {
+                    text: "I love the variety of healthy options available. As someone with dietary restrictions, it's great to have meals I can trust that are also delicious.",
+                    author: "Mark Williams",
+                    role: "Health Enthusiast"
+                },
+                {
+                    text: "The delivery is always on time and the packaging is eco-friendly. Highly recommend Fitmeal to anyone looking for convenient, healthy meals.",
+                    author: "Lisa Chen",
+                    role: "Busy Professional"
+                }
+            ];
+            
+            const testimonialElement = document.querySelector('.testimonial-item');
+            let currentTestimonial = 0;
+            
+            function showTestimonial(index) {
+                const testimonial = testimonials[index];
+                testimonialElement.innerHTML = `
+                    <i class="fas fa-quote-left"></i>
+                    <p class="testimonial-text">${testimonial.text}</p>
+                    <div class="testimonial-author">
+                        ${testimonial.author}
+                        <span>${testimonial.role}</span>
+                    </div>
+                `;
+            }
+            
+            // Rotate testimonials every 5 seconds
+            setInterval(() => {
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(currentTestimonial);
+            }, 5000);
+            
+            // Initialize first testimonial
+            showTestimonial(0);
+
+            // Food Spots Sidebar Functionality
+            const foodSpotsSidebar = document.querySelector('.food-spots-sidebar');
+            const closeSidebarBtn = document.querySelector('.close-sidebar');
+            const showAllBtn = document.getElementById('showAllBtn');
+            const nearMeBtn = document.getElementById('nearMeBtn');
+            const foodSpotsList = document.getElementById('foodSpotsList');
+
+            // Toggle sidebar
+            foodSpotsSidebar.addEventListener('click', (e) => {
+                // Only toggle if clicking on the sidebar itself, not its children
+                if (e.target === foodSpotsSidebar) {
+                    foodSpotsSidebar.classList.toggle('expanded');
                 }
             });
-        });
-        
-        // Simple Testimonial Slider
-        const testimonials = [
-            {
-                text: "The food was absolutely delicious! I've been ordering from Fitmeal for months now and I can honestly say it's changed my eating habits for the better. The meals are always fresh and full of flavor.",
-                author: "Sarah Johnson",
-                role: "Regular Customer"
-            },
-            {
-                text: "I love the variety of healthy options available. As someone with dietary restrictions, it's great to have meals I can trust that are also delicious.",
-                author: "Mark Williams",
-                role: "Health Enthusiast"
-            },
-            {
-                text: "The delivery is always on time and the packaging is eco-friendly. Highly recommend Fitmeal to anyone looking for convenient, healthy meals.",
-                author: "Lisa Chen",
-                role: "Busy Professional"
+
+            // Close sidebar
+            closeSidebarBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                foodSpotsSidebar.classList.remove('expanded');
+            });
+
+            // Sample food spots data (latitude, longitude, name)
+            const foodSpots = [
+                { id: 1, name: "Green Leaf Cafe", lat: 40.7128, lng: -74.0060, distance: 0.5, icon: "leaf" },
+                { id: 2, name: "Organic Bistro", lat: 40.7145, lng: -74.0082, distance: 1.2, icon: "utensils" },
+                { id: 3, name: "Vegan Delight", lat: 40.7110, lng: -74.0095, distance: 0.8, icon: "carrot" },
+                { id: 4, name: "Fresh Market", lat: 40.7150, lng: -74.0030, distance: 1.5, icon: "store" },
+                { id: 5, name: "Juice Bar", lat: 40.7135, lng: -74.0045, distance: 0.3, icon: "glass-whiskey" }
+            ];
+
+            // Preset user location (New York coordinates)
+            const userLocation = {
+                lat: 40.7128,
+                lng: -74.0060
+            };
+
+            // Initialize map
+            let map;
+            let markers = [];
+
+            function initMap() {
+                map = L.map('foodSpotsMap').setView([userLocation.lat, userLocation.lng], 14);
+                
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                // Add user location marker
+                L.marker([userLocation.lat, userLocation.lng], {
+                    icon: L.divIcon({
+                        className: 'user-location-marker',
+                        html: '<i class="fas fa-map-pin" style="color: #6cbb23; font-size: 24px;"></i>',
+                        iconSize: [24, 24],
+                        iconAnchor: [12, 24]
+                    })
+                }).addTo(map)
+                .bindPopup('Your Location')
+                .openPopup();
+
+                // Add food spots to map and list
+                renderFoodSpots(foodSpots);
             }
-        ];
-        
-        const testimonialElement = document.querySelector('.testimonial-item');
-        let currentTestimonial = 0;
-        
-        function showTestimonial(index) {
-            const testimonial = testimonials[index];
-            testimonialElement.innerHTML = `
-                <i class="fas fa-quote-left"></i>
-                <p class="testimonial-text">${testimonial.text}</p>
-                <div class="testimonial-author">
-                    ${testimonial.author}
-                    <span>${testimonial.role}</span>
-                </div>
-            `;
-        }
-        
-        // Rotate testimonials every 5 seconds
-        setInterval(() => {
-            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-            showTestimonial(currentTestimonial);
-        }, 5000);
-        
-        // Initialize first testimonial
-        showTestimonial(0);
-    </script>
-</body>
-</html>
+
+            // Render food spots on map and in list
+            function renderFoodSpots(spots) {
+                // Clear existing markers
+                markers.forEach(marker => map.removeLayer(marker));
+                markers = [];
+                
+                // Clear list
+                foodSpotsList.innerHTML = '';
+
+                // Add each spot to map and list
+                spots.forEach(spot => {
+                    // Add to map
+                    const marker = L.marker([spot.lat, spot.lng], {
+                        icon: L.divIcon({
+                            className: 'food-spot-marker',
+                            html: `<i class="fas fa-${spot.icon}" style="color: #fff; font-size: 16px; background: #6cbb23; padding: 8px; border-radius: 50%;"></i>`,
+                            iconSize: [24, 24],
+                            iconAnchor: [12, 24]
+                        })
+                    }).addTo(map)
+                    .bindPopup(spot.name);
+                    
+                    markers.push(marker);
+
+                    // Add to list
+                    const spotItem = document.createElement('div');
+                    spotItem.className = 'food-spot-item';
+                    spotItem.innerHTML = `
+                        <div class="food-spot-icon">
+                            <i class="fas fa-${spot.icon}"></i>
+                        </div>
+                        <div class="food-spot-info">
+                            <div class="food-spot-name">${spot.name}</div>
+                            <div class="food-spot-distance">${spot.distance} miles away</div>
+                        </div>
+                    `;
+                    
+                    spotItem.addEventListener('click', () => {
+                        map.setView([spot.lat, spot.lng], 16);
+                        marker.openPopup();
+                    });
+                    
+                    foodSpotsList.appendChild(spotItem);
+                });
+            }
+
+            // Show all spots
+            showAllBtn.addEventListener('click', () => {
+                showAllBtn.classList.add('active');
+                nearMeBtn.classList.remove('active');
+                renderFoodSpots(foodSpots);
+            });
+
+            // Show spots sorted by distance
+            nearMeBtn.addEventListener('click', () => {
+                nearMeBtn.classList.add('active');
+                showAllBtn.classList.remove('active');
+                
+                // Sort spots by distance (already in the sample data)
+                const sortedSpots = [...foodSpots].sort((a, b) => a.distance - b.distance);
+                renderFoodSpots(sortedSpots);
+            });
+
+            // Initialize the map when sidebar is expanded
+            foodSpotsSidebar.addEventListener('click', function() {
+                if (this.classList.contains('expanded') && !map) {
+                    initMap();
+                }
+            });
+
+            // Close sidebar when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!foodSpotsSidebar.contains(e.target) )
+                {
+                    foodSpotsSidebar.classList.remove('expanded');
+                }
+            });
+        </script>
+    </body> 
+</html>Ś
