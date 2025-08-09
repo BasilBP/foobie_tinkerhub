@@ -64,7 +64,6 @@ Visit: [**ReelBites on ngrok**](https://a21f54cffa76.ngrok-free.app/)
 ---
 
 ### Diagrams
-![Workflow](Add your workflow/architecture diagram here)  
 *System workflow: User uploads → Flask API processes → AI & metadata extraction → Location mapping.*
 
 ---
