@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitmeal - Healthy Food & Nutrition</title>
+    <title>ReelBites - Find Food Spots from Instagram Reels</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Reset and Base Styles */
         * {
@@ -101,6 +102,13 @@
             margin: 0 auto;
             color: var(--text-color);
         }
+        
+        pre {
+            font-family: 'Poppins', sans-serif;
+            white-space: pre-wrap;
+            margin: 0 auto;
+            text-align: center;
+        }
 
         /* Header Styles */
         .header {
@@ -177,7 +185,7 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+            background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
             display: flex;
             align-items: center;
             position: relative;
@@ -318,98 +326,10 @@
             margin-bottom: 15px;
         }
 
-        /* Menu Section */
-        .menu {
-            padding: 100px 0;
-            background-color: var(--light-bg);
-        }
-
-        .menu-tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .menu-tab {
-            padding: 10px 25px;
-            background-color: var(--white);
-            border-radius: 30px;
-            margin: 0 10px 10px 0;
-            cursor: pointer;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .menu-tab.active,
-        .menu-tab:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
-
-        .menu-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .menu-item {
-            background-color: var(--white);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            display: flex;
-            transition: var(--transition);
-        }
-
-        .menu-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .menu-item-img {
-            width: 120px;
-            height: 120px;
-            flex-shrink: 0;
-        }
-
-        .menu-item-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .menu-item-content {
-            padding: 20px;
-            flex-grow: 1;
-        }
-
-        .menu-item-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .menu-item-title {
-            font-size: 18px;
-            color: var(--secondary-color);
-            font-weight: 600;
-        }
-
-        .menu-item-price {
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-
-        .menu-item-desc {
-            font-size: 14px;
-            color: #777;
-        }
-
         /* Testimonials Section */
         .testimonials {
             padding: 100px 0;
-            background: url('https://via.placeholder.com/1920x800') no-repeat center center/cover;
+            background: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
             position: relative;
             text-align: center;
             color: var(--white);
@@ -463,85 +383,6 @@
             font-size: 14px;
             margin-top: 5px;
             opacity: 0.8;
-        }
-
-        /* Team Section */
-        .team {
-            padding: 100px 0;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .team-member {
-            background-color: var(--white);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .team-member:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .team-member-img {
-            height: 300px;
-            overflow: hidden;
-        }
-
-        .team-member-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .team-member:hover .team-member-img img {
-            transform: scale(1.1);
-        }
-
-        .team-member-info {
-            padding: 25px 20px;
-        }
-
-        .team-member-name {
-            font-size: 20px;
-            color: var(--secondary-color);
-            margin-bottom: 5px;
-        }
-
-        .team-member-role {
-            color: var(--primary-color);
-            font-weight: 500;
-            margin-bottom: 15px;
-        }
-
-        .team-member-social {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .team-member-social a {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background-color: #f5f5f5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-
-        .team-member-social a:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
         }
 
         /* Contact Section */
@@ -709,11 +550,11 @@
         }
 
         .food-spots-sidebar.expanded {
-            width: 350px;
-            height: 80vh;
+            width: 400px;
+            height: 85vh;
             border-radius: 10px 0 0 10px;
             align-items: flex-start;
-            padding: 20px;
+            padding: 25px;
         }
 
         .food-spots-sidebar.expanded .sidebar-icon {
@@ -742,7 +583,7 @@
         }
 
         .sidebar-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
         }
 
@@ -750,7 +591,7 @@
             background: none;
             border: none;
             color: white;
-            font-size: 20px;
+            font-size: 22px;
             cursor: pointer;
         }
 
@@ -775,7 +616,7 @@
         }
 
         .sidebar-btn {
-            padding: 8px 15px;
+            padding: 10px 20px;
             background-color: rgba(255, 255, 255, 0.2);
             border: none;
             border-radius: 20px;
@@ -797,12 +638,26 @@
         .food-spots-list {
             max-height: 25%;
             overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .food-spots-list::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .food-spots-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .food-spots-list::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
         }
 
         .food-spot-item {
             display: flex;
             align-items: center;
-            padding: 10px;
+            padding: 12px;
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             margin-bottom: 10px;
@@ -815,8 +670,9 @@
         }
 
         .food-spot-icon {
-            margin-right: 10px;
+            margin-right: 12px;
             color: white;
+            font-size: 18px;
         }
 
         .food-spot-info {
@@ -825,15 +681,267 @@
 
         .food-spot-name {
             font-weight: 500;
-            margin-bottom: 3px;
+            margin-bottom: 5px;
+            font-size: 16px;
         }
 
         .food-spot-distance {
-            font-size: 12px;
+            font-size: 13px;
             opacity: 0.8;
         }
 
+        /* How It Works Section */
+        .how-it-works {
+            padding: 100px 0;
+            background-color: var(--light-bg);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .step {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0 auto 20px;
+        }
+
+        .step-title {
+            font-size: 20px;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        /* Reel Finder Section */
+        .reel-finder {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+
+        .reel-finder-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .reel-finder-header {
+            background: linear-gradient(135deg, #259219 0%, #09811b 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .reel-finder-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .reel-finder-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .reel-finder-content {
+            padding: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .url-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .url-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(108, 187, 35, 0.1);
+        }
+
+        .search-button {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #5aa01c 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .search-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(108, 187, 35, 0.3);
+        }
+
+        .search-button:active {
+            transform: translateY(0);
+        }
+
+        .search-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-section {
+            margin-top: 30px;
+        }
+
+        .location-display {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .location-display.loading {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        .location-display.success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        .location-display.error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        @keyframes loading {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+
+        .maps-link {
+            display: inline-block;
+            background: #4285f4;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .maps-link:hover {
+            background: #3367d6;
+        }
+
+        .map-container {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: 400px;
+        }
+
+        #reelFinderMap {
+            height: 100%;
+            width: 100%;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-indicator.loading {
+            background: #ffc107;
+            animation: pulse 1.5s infinite;
+        }
+
+        .status-indicator.success {
+            background: #28a745;
+        }
+
+        .status-indicator.error {
+            background: #dc3545;
+        }
+
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+
+        .reel-finder-footer {
+            background: #f8f9fa;
+          padding: 20px;
+          text-align: center;
+          color: #6c757d;
+          font-size: 0.9rem;
+        }
+
         /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .food-spots-sidebar.expanded {
+                width: 350px;
+            }
+        }
+
         @media (max-width: 992px) {
             .hero-content h1 {
                 font-size: 48px;
@@ -843,8 +951,7 @@
                 flex-direction: column;
             }
 
-            .about-img,
-            .about-content {
+            .about-img, .about-content {
                 flex: none;
                 width: 100%;
             }
@@ -890,13 +997,17 @@
             }
 
             .food-spots-sidebar.expanded {
-                width: 300px;
-                height: 70vh;
+                width: 320px;
+                height: 80vh;
+            }
+
+            .reel-finder-header h2 {
+                font-size: 2rem;
             }
         }
 
         @media (max-width: 576px) {
-            .menu-items {
+            .steps {
                 grid-template-columns: 1fr;
             }
 
@@ -910,708 +1021,708 @@
 
             .food-spots-sidebar.expanded {
                 width: 280px;
-                height: 60vh;
+                height: 70vh;
+            }
+
+            .reel-finder-content {
+                padding: 20px;
             }
         }
     </style>
 </head>
-    <body>
-        <!-- Food Spots Sidebar -->
-        <div class="food-spots-sidebar">
-            <div class="sidebar-icon">
-                <i class="fas fa-map-marker-alt"></i>
+<body>
+    <!-- Food Spots Sidebar -->
+    <div class="food-spots-sidebar">
+        <div class="sidebar-icon">
+            <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="sidebar-content">
+            <div class="sidebar-header">
+                <div class="sidebar-title">My Food Spots</div>
+                <button class="close-sidebar">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <div class="sidebar-content">
-                <div class="sidebar-header">
-                    <div class="sidebar-title">My Food Spots</div>
-                    <button class="close-sidebar">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="sidebar-map">
-                    <div id="foodSpotsMap"></div>
-                </div>
-                <div class="sidebar-controls">
-                    <button class="sidebar-btn active" id="showAllBtn">All Spots</button>
-                    <button class="sidebar-btn" id="nearMeBtn">Near Me</button>
-                </div>
-                <div class="food-spots-list" id="foodSpotsList">
-                    <!-- Food spots will be added here dynamically -->
+            <div class="sidebar-map">
+                <div id="foodSpotsMap"></div>
+            </div>
+            <div class="sidebar-controls">
+                <button class="sidebar-btn active" id="showAllBtn">All Spots</button>
+                <button class="sidebar-btn" id="nearMeBtn">Near Me</button>
+                <button class="sidebar-btn" id="recentBtn">Recent</button>
+            </div>
+            <div class="food-spots-list" id="foodSpotsList">
+                <!-- Food spots will be added here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo">Reel<span>Bites</span></a>
+            
+            <nav class="nav">
+                <ul class="nav-menu">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#reel-finder">Reel Finder</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Scroll it. Spot it. Nosh it.</h1>
+                <p>Find the exact location of any food spot featured in an Instagram Reel. From scroll to snack in seconds.</p>
+                <div class="hero-btns">
+                    <a href="#reel-finder" class="btn">Find Locations</a>
+                    <a href="#how-it-works" class="btn btn-outline">How It Works</a>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Header -->
-        <header class="header">
-            <div class="container header-container">
-                <a href="#" class="logo">Reel<span>Bites</span></a>
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About ReelBites</h2>
+                <pre>At ReelBites, we've cracked the code on food discovery—no more endless scrolling or "where should we eat?" debates. 
+Our AI-powered platform analyzes Instagram Reels to instantly identify and locate the exact food spots featured in the videos.</pre>
+            </div>
+            
+            <div class="about-container">
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="About ReelBites">
+                </div>
                 
-                <nav class="nav">
-                    <ul class="nav-menu">
-                        <li><a href="#home" class="active">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#menu">Menu</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#team">Team</a></li>
+                <div class="about-content">
+                    <h2>From Reel to Real Meal</h2>
+                    <p>We combine visual recognition, audio analysis, and geolocation technology to pinpoint the exact restaurants, food trucks, or cafes featured in Instagram Reels. No more guessing or endless searching.</p>
+                    <p>Our platform is constantly learning from millions of food videos to improve accuracy and provide you with the most reliable results.</p>
+                    
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="fas fa-bolt"></i>
+                            <div>
+                                <h3>Instant Discovery</h3>
+                                <p>Get the exact location of food spots in seconds with our advanced AI technology.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="about-feature">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <div>
+                                <h3>Precise Locations</h3>
+                                <p>We analyze visual cues, audio mentions, and metadata to pinpoint exact locations.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="about-feature">
+                            <i class="fas fa-route"></i>
+                            <div>
+                                <h3>Navigation Ready</h3>
+                                <p>One-tap directions to take you straight to the food spot from your current location.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How ReelBites Works</h2>
+                <p>Discover food spots from Instagram Reels in just three simple steps</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Paste Reel URL</h3>
+                    <p>Copy and paste the Instagram Reel URL featuring the food spot you want to find.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">AI Analysis</h3>
+                    <p>Our technology analyzes visual cues, audio mentions, and metadata to identify the location.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Get Directions</h3>
+                    <p>Receive the exact location with one-tap navigation to guide you there.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reel Finder Section -->
+    <section class="reel-finder" id="reel-finder">
+        <div class="container">
+            <div class="section-title">
+                <h2>Instagram Reel Finder</h2>
+                <p>Extract and discover locations from Instagram reels with precision</p>
+            </div>
+            
+            <div class="reel-finder-container">
+                <div class="reel-finder-header">
+                    <h2>🗺️ Instagram Reel Finder</h2>
+                    <p>Extract and discover locations from Instagram reels with precision</p>
+                </div>
+                
+                <div class="reel-finder-content">
+                    <div class="input-group">
+                        <label class="input-label" for="reel-url">Instagram Reel URL</label>
+                        <input 
+                            type="text" 
+                            id="reel-url" 
+                            class="url-input"
+                            placeholder="Paste your Instagram reel URL here (e.g., https://www.instagram.com/reel/...)" 
+                        />
+                    </div>
+                    
+                    <button class="search-button" onclick="fetchLocation()" id="search-btn">
+                        🔍 Find Location
+                    </button>
+                    
+                    <div class="result-section">
+                        <div id="location-text" class="location-display">
+                            <span>🎯 Ready to find location! Paste an Instagram reel URL and click search.</span>
+                        </div>
+                        
+                        <div class="map-container">
+                            <div id="reelFinderMap"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reel-finder-footer">
+                    <p>💡 Tip: Make sure the Instagram reel contains location information in its description</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Users Say</h2>
+                <p>Hear from people who've discovered amazing food spots with ReelBites</p>
+            </div>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial-item">
+                    <i class="fas fa-quote-left"></i>
+                    <p class="testimonial-text">I saw this amazing pasta dish on Instagram but had no idea where it was from. ReelBites found the exact restaurant in seconds! The food was even better in person. This app has completely changed how I discover new places to eat.</p>
+                    <div class="testimonial-author">
+                        Sarah Johnson
+                        <span>Food Enthusiast</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get in touch with us for any questions</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p>Feel free to contact us for any questions or reservations.</p>
+                    
+                    <div class="contact-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>123 Healthy Street, Nutrition City, 12345</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+1 234 567 890</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@reelbites.com</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" placeholder="Subject">
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <p>ReelBites helps you discover amazing food spots from Instagram Reels with our advanced AI technology.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#reel-finder">Reel Finder</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
-                </nav>
-                
-                <div class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </div>
-        </header>
-
-        <!-- Hero Section -->
-        <section class="hero" id="home">
-            <div class="container">
-                <div class="hero-content">
-                    <h1><b>"Scroll it. Spot it. Nosh it."</b></h1>
-                    <p>We provide healthy food for your family. Our service is a great way to get healthy food delivered to your door.</p>
-                    <div class="hero-btns">
-                        <a href="#" class="btn">View Menu</a>
-                        <a href="#" class="btn btn-outline">Book a Table</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section class="about" id="about">
-            <div class="container">
-                <div class="section-title">
-                    <h2>About Us</h2>
-                    <pre> At ReelBites, we’ve cracked the code on food discovery—no more endless scrolling or "where should we eat?" debates. We fuse addictive short videos with real-time food spot magic, so every swipe serves up your next favorite meal.
-
-                        Scroll. Drool. Go.</pre>
                 </div>
                 
-                <div class="about-container">
-                    <div class="about-img">
-                        <img src="https://via.placeholder.com/600x600" alt="About Us">
-                    </div>
-                    
-                    <div class="about-content">
-                        <h2>We Provide Healthy Food For Your Family</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
-                        
-                        <div class="about-features">
-                            <div class="about-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <div>
-                                    <h3>Instant Discovery</h3>
-                                    <p>No more Googling or switching apps—find food spots while you watch.</p>
-                                </div>
-                            </div>
-                            
-                            <div class="about-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <div>
-                                    <h3>Professional Chefs</h3>
-                                    <p>Our chefs are highly trained and experienced.</p>
-                                </div>
-                            </div>
-                            
-                            <div class="about-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <div>
-                                    <h3>Organic Food</h3>
-                                    <p>We source organic ingredients whenever possible.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Services Section -->
-        <section class="services" id="services">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Our Services</h2>
-                    <p>We provide healthy food for your family. Our service is a great way to get healthy food delivered to your door.</p>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Location Detection</a></li>
+                        <li><a href="#">AI Analysis</a></li>
+                        <li><a href="#">Navigation</a></li>
+                        <li><a href="#">Food Spot Discovery</a></li>
+                        <li><a href="#">Reel Processing</a></li>
+                    </ul>
                 </div>
                 
-                <div class="services-grid">
-                    <div class="service-card">
-                        <i class="fas fa-utensils"></i>
-                        <h3>Healthy Meals</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                    
-                    <div class="service-card">
-                        <i class="fas fa-truck"></i>
-                        <h3> Reel-to-Location</h3>
-                        <pre><b>Upload. Analyze. Locate.</b>
-                            Upload your Instagram Reel, and our smart AI analyzes visual, audio, and metadata cues to detect the exact food spot location.</pre>
-                       
-                    </div>
-                    
-                    <div class="service-card">
-                        <i class="fas fa-heartbeat"></i>
-                        <h3>Nutrition Plans</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Menu Section -->
-        <section class="menu" id="menu">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Our Menu</h2>
-                    <p>We provide healthy food for your family. Our service is a great way to get healthy food delivered to your door.</p>
-                </div>
-                
-                <div class="menu-tabs">
-                    <div class="menu-tab active" data-category="all">All</div>
-                    <div class="menu-tab" data-category="breakfast">Breakfast</div>
-                    <div class="menu-tab" data-category="lunch">Lunch</div>
-                    <div class="menu-tab" data-category="dinner">Dinner</div>
-                    <div class="menu-tab" data-category="desserts">Desserts</div>
-                    <div class="menu-tab" data-category="drinks">Drinks</div>
-                </div>
-                
-                <div class="menu-items">
-                    <div class="menu-item" data-category="breakfast">
-                        <div class="menu-item-img">
-                            <img src="https://via.placeholder.com/120x120" alt="Breakfast Item">
-                        </div>
-                        <div class="menu-item-content">
-                            <div class="menu-item-header">
-                                <h3 class="menu-item-title">Avocado Toast</h3>
-                                <span class="menu-item-price">$12.99</span>
-                            </div>
-                            <p class="menu-item-desc">Fresh avocado on whole grain toast with cherry tomatoes and feta cheese.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item" data-category="lunch">
-                        <div class="menu-item-img">
-                            <img src="https://via.placeholder.com/120x120" alt="Lunch Item">
-                        </div>
-                        <div class="menu-item-content">
-                            <div class="menu-item-header">
-                                <h3 class="menu-item-title">Quinoa Salad</h3>
-                                <span class="menu-item-price">$14.99</span>
-                            </div>
-                            <p class="menu-item-desc">Fresh quinoa with mixed greens, cherry tomatoes, cucumber, and lemon dressing.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item" data-category="dinner">
-                        <div class="menu-item-img">
-                            <img src="https://via.placeholder.com/120x120" alt="Dinner Item">
-                        </div>
-                        <div class="menu-item-content">
-                            <div class="menu-item-header">
-                                <h3 class="menu-item-title">Grilled Salmon</h3>
-                                <span class="menu-item-price">$22.99</span>
-                            </div>
-                            <p class="menu-item-desc">Freshly grilled salmon with roasted vegetables and quinoa.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item" data-category="desserts">
-                        <div class="menu-item-img">
-                            <img src="https://via.placeholder.com/120x120" alt="Dessert Item">
-                        </div>
-                        <div class="menu-item-content">
-                            <div class="menu-item-header">
-                                <h3 class="menu-item-title">Chia Pudding</h3>
-                                <span class="menu-item-price">$8.99</span>
-                            </div>
-                            <p class="menu-item-desc">Chia seeds soaked in almond milk with fresh berries and honey.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item" data-category="drinks">
-                        <div class="menu-item-img">
-                            <img src="https://via.placeholder.com/120x120" alt="Drink Item">
-                        </div>
-                        <div class="menu-item-content">
-                            <div class="menu-item-header">
-                                <h3 class="menu-item-title">Green Smoothie</h3>
-                                <span class="menu-item-price">$6.99</span>
-                            </div>
-                            <p class="menu-item-desc">Spinach, kale, banana, almond milk, and chia seeds blended to perfection.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item" data-category="breakfast">
-                        <div class="menu-item-img">
-                            <img src="https://via.placeholder.com/120x120" alt="Breakfast Item">
-                        </div>
-                        <div class="menu-item-content">
-                            <div class="menu-item-header">
-                                <h3 class="menu-item-title">Acai Bowl</h3>
-                                <span class="menu-item-price">$10.99</span>
-                            </div>
-                            <p class="menu-item-desc">Acai berry blend topped with granola, banana, and coconut flakes.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonials Section -->
-        <section class="testimonials" id="testimonials">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Testimonials</h2>
-                    <p>What our customers say about us</p>
-                </div>
-                
-                <div class="testimonial-slider">
-                    <div class="testimonial-item">
-                        <i class="fas fa-quote-left"></i>
-                        <p class="testimonial-text">The food was absolutely delicious! I've been ordering from Fitmeal for months now and I can honestly say it's changed my eating habits for the better. The meals are always fresh and full of flavor.</p>
-                        <div class="testimonial-author">
-                            Sarah Johnson
-                            <span>Regular Customer</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Team Section -->
-        <section class="team" id="team">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Our Team</h2>
-                    <p>Meet our professional chefs</p>
-                </div>
-                
-                <div class="team-grid">
-                    <div class="team-member">
-                        <div class="team-member-img">
-                            <img src="https://via.placeholder.com/300x300" alt="Chef">
-                        </div>
-                        <div class="team-member-info">
-                            <h3 class="team-member-name">Michael Smith</h3>
-                            <p class="team-member-role">Head Chef</p>
-                            <div class="team-member-social">
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="team-member">
-                        <div class="team-member-img">
-                            <img src="https://via.placeholder.com/300x300" alt="Chef">
-                        </div>
-                        <div class="team-member-info">
-                            <h3 class="team-member-name">Emily Davis</h3>
-                            <p class="team-member-role">Nutritionist</p>
-                            <div class="team-member-social">
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="team-member">
-                        <div class="team-member-img">
-                            <img src="https://via.placeholder.com/300x300" alt="Chef">
-                        </div>
-                        <div class="team-member-info">
-                            <h3 class="team-member-name">David Wilson</h3>
-                            <p class="team-member-role">Sous Chef</p>
-                            <div class="team-member-social">
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="contact" id="contact">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Contact Us</h2>
-                    <p>Get in touch with us for any questions</p>
-                </div>
-                
-                <div class="contact-container">
-                    <div class="contact-info">
-                        <h3>Contact Information</h3>
-                        <p>Feel free to contact us for any questions or reservations.</p>
-                        
-                        <div class="contact-info-item">
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-contact-info">
+                        <li>
                             <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4>Address</h4>
-                                <p>123 Healthy Street, Nutrition City, 12345</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-info-item">
+                            <span>123 Healthy Street, Nutrition City, 12345</span>
+                        </li>
+                        <li>
                             <i class="fas fa-phone-alt"></i>
-                            <div>
-                                <h4>Phone</h4>
-                                <p>+1 234 567 890</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-info-item">
+                            <span>+1 234 567 890</span>
+                        </li>
+                        <li>
                             <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>Email</h4>
-                                <p>info@fitmeal.com</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-form">
-                        <form>
-                            <div class="form-group">
-                                <input type="text" placeholder="Your Name" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="email" placeholder="Your Email" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" placeholder="Subject">
-                            </div>
-                            
-                            <div class="form-group">
-                                <textarea placeholder="Your Message" required></textarea>
-                            </div>
-                            
-                            <button type="submit" class="btn">Send Message</button>
-                        </form>
-                    </div>
+                            <span>info@reelbites.com</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </section>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 ReelBites. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="container">
-                <div class="footer-container">
-                    <div class="footer-col">
-                        <h3>About Us</h3>
-                        <p>Fitmeal is a healthy food restaurant that provides nutritious and delicious meals for your family.</p>
-                        <div class="footer-social">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    
-                    <div class="footer-col">
-                        <h3>Quick Links</h3>
-                        <ul class="footer-links">
-                            <li><a href="#home">Home</a></li>
-                            <li><a href="#about">About Us</a></li>
-                            <li><a href="#services">Services</a></li>
-                            <li><a href="#menu">Menu</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-col">
-                        <h3>Services</h3>
-                        <ul class="footer-links">
-                            <li><a href="#">Healthy Meals</a></li>
-                            <li><a href="#">Fast Delivery</a></li>
-                            <li><a href="#">Nutrition Plans</a></li>
-                            <li><a href="#">Catering</a></li>
-                            <li><a href="#">Cooking Classes</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-col">
-                        <h3>Contact Info</h3>
-                        <ul class="footer-contact-info">
-                            <li>
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>123 Healthy Street, Nutrition City, 12345</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-phone-alt"></i>
-                                <span>+1 234 567 890</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-envelope"></i>
-                                <span>info@fitmeal.com</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu li a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Sticky Header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
                 
-                <div class="footer-bottom">
-                    <p>&copy; 2023 Fitmeal. All Rights Reserved.</p>
-                </div>
-            </div>
-        </footer>
-
-        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-        <script>
-            // Mobile Menu Toggle
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const navMenu = document.querySelector('.nav-menu');
-            
-            mobileMenuBtn.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
-                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-            });
-            
-            // Close mobile menu when clicking on a link
-            document.querySelectorAll('.nav-menu li a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                });
-            });
-            
-            // Sticky Header
-            window.addEventListener('scroll', () => {
-                const header = document.querySelector('.header');
-                header.classList.toggle('scrolled', window.scrollY > 50);
-            });
-            
-            // Menu Filter
-            const menuTabs = document.querySelectorAll('.menu-tab');
-            const menuItems = document.querySelectorAll('.menu-item');
-            
-            menuTabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    // Remove active class from all tabs
-                    menuTabs.forEach(t => t.classList.remove('active'));
-                    // Add active class to clicked tab
-                    tab.classList.add('active');
-                    
-                    const category = tab.dataset.category;
-                    
-                    // Filter menu items
-                    menuItems.forEach(item => {
-                        if (category === 'all' || item.dataset.category === category) {
-                            item.style.display = 'flex';
-                        } else {
-                            item.style.display = 'none';
-                        }
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
                     });
-                });
-            });
-            
-            // Smooth Scrolling for Anchor Links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
-            // Simple Testimonial Slider
-            const testimonials = [
-                {
-                    text: "The food was absolutely delicious! I've been ordering from Fitmeal for months now and I can honestly say it's changed my eating habits for the better. The meals are always fresh and full of flavor.",
-                    author: "Sarah Johnson",
-                    role: "Regular Customer"
-                },
-                {
-                    text: "I love the variety of healthy options available. As someone with dietary restrictions, it's great to have meals I can trust that are also delicious.",
-                    author: "Mark Williams",
-                    role: "Health Enthusiast"
-                },
-                {
-                    text: "The delivery is always on time and the packaging is eco-friendly. Highly recommend Fitmeal to anyone looking for convenient, healthy meals.",
-                    author: "Lisa Chen",
-                    role: "Busy Professional"
                 }
-            ];
-            
-            const testimonialElement = document.querySelector('.testimonial-item');
-            let currentTestimonial = 0;
-            
-            function showTestimonial(index) {
-                const testimonial = testimonials[index];
-                testimonialElement.innerHTML = `
-                    <i class="fas fa-quote-left"></i>
-                    <p class="testimonial-text">${testimonial.text}</p>
-                    <div class="testimonial-author">
-                        ${testimonial.author}
-                        <span>${testimonial.role}</span>
-                    </div>
-                `;
+            });
+        });
+        
+        // Simple Testimonial Slider
+        const testimonials = [
+            {
+                text: "The food was absolutely delicious! I've been ordering from Fitmeal for months now and I can honestly say it's changed my eating habits for the better. The meals are always fresh and full of flavor.",
+                author: "Sarah Johnson",
+                role: "Regular Customer"
+            },
+            {
+                text: "I love the variety of healthy options available. As someone with dietary restrictions, it's great to have meals I can trust that are also delicious.",
+                author: "Mark Williams",
+                role: "Health Enthusiast"
+            },
+            {
+                text: "The delivery is always on time and the packaging is eco-friendly. Highly recommend Fitmeal to anyone looking for convenient, healthy meals.",
+                author: "Lisa Chen",
+                role: "Busy Professional"
             }
+        ];
+        
+        const testimonialElement = document.querySelector('.testimonial-item');
+        let currentTestimonial = 0;
+        
+        function showTestimonial(index) {
+            const testimonial = testimonials[index];
+            testimonialElement.innerHTML = `
+                <i class="fas fa-quote-left"></i>
+                <p class="testimonial-text">${testimonial.text}</p>
+                <div class="testimonial-author">
+                    ${testimonial.author}
+                    <span>${testimonial.role}</span>
+                </div>
+            `;
+        }
+        
+        // Rotate testimonials every 5 seconds
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }, 5000);
+        
+        // Initialize first testimonial
+        showTestimonial(0);
+
+        // Food Spots Sidebar Functionality
+        const foodSpotsSidebar = document.querySelector('.food-spots-sidebar');
+        const closeSidebarBtn = document.querySelector('.close-sidebar');
+        const showAllBtn = document.getElementById('showAllBtn');
+        const nearMeBtn = document.getElementById('nearMeBtn');
+        const foodSpotsList = document.getElementById('foodSpotsList');
+
+        // Toggle sidebar
+        foodSpotsSidebar.addEventListener('click', (e) => {
+            // Only toggle if clicking on the sidebar itself, not its children
+            if (e.target === foodSpotsSidebar) {
+                foodSpotsSidebar.classList.toggle('expanded');
+            }
+        });
+
+        // Close sidebar
+        closeSidebarBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            foodSpotsSidebar.classList.remove('expanded');
+        });
+
+        // Sample food spots data (latitude, longitude, name)
+        const foodSpots = [
+            { id: 1, name: "Green Leaf Cafe", lat: 40.7128, lng: -74.0060, distance: 0.5, icon: "leaf" },
+            { id: 2, name: "Organic Bistro", lat: 40.7145, lng: -74.0082, distance: 1.2, icon: "utensils" },
+            { id: 3, name: "Vegan Delight", lat: 40.7110, lng: -74.0095, distance: 0.8, icon: "carrot" },
+            { id: 4, name: "Fresh Market", lat: 40.7150, lng: -74.0030, distance: 1.5, icon: "store" },
+            { id: 5, name: "Juice Bar", lat: 40.7135, lng: -74.0045, distance: 0.3, icon: "glass-whiskey" }
+        ];
+
+        // Preset user location (New York coordinates)
+        const userLocation = {
+            lat: 40.7128,
+            lng: -74.0060
+        };
+
+        // Initialize food spots map
+        let foodSpotsMap;
+        let foodSpotMarkers = [];
+
+        function initFoodSpotsMap() {
+            foodSpotsMap = L.map('foodSpotsMap').setView([userLocation.lat, userLocation.lng], 14);
             
-            // Rotate testimonials every 5 seconds
-            setInterval(() => {
-                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-                showTestimonial(currentTestimonial);
-            }, 5000);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(foodSpotsMap);
+
+            // Add user location marker
+            L.marker([userLocation.lat, userLocation.lng], {
+                icon: L.divIcon({
+                    className: 'user-location-marker',
+                    html: '<i class="fas fa-map-pin" style="color: #6cbb23; font-size: 24px;"></i>',
+                    iconSize: [24, 24],
+                    iconAnchor: [12, 24]
+                })
+            }).addTo(foodSpotsMap)
+            .bindPopup('Your Location')
+            .openPopup();
+
+            // Add food spots to map and list
+            renderFoodSpots(foodSpots);
+        }
+
+        // Render food spots on map and in list
+        function renderFoodSpots(spots) {
+            // Clear existing markers
+            foodSpotMarkers.forEach(marker => foodSpotsMap.removeLayer(marker));
+            foodSpotMarkers = [];
             
-            // Initialize first testimonial
-            showTestimonial(0);
+            // Clear list
+            foodSpotsList.innerHTML = '';
 
-            // Food Spots Sidebar Functionality
-            const foodSpotsSidebar = document.querySelector('.food-spots-sidebar');
-            const closeSidebarBtn = document.querySelector('.close-sidebar');
-            const showAllBtn = document.getElementById('showAllBtn');
-            const nearMeBtn = document.getElementById('nearMeBtn');
-            const foodSpotsList = document.getElementById('foodSpotsList');
-
-            // Toggle sidebar
-            foodSpotsSidebar.addEventListener('click', (e) => {
-                // Only toggle if clicking on the sidebar itself, not its children
-                if (e.target === foodSpotsSidebar) {
-                    foodSpotsSidebar.classList.toggle('expanded');
-                }
-            });
-
-            // Close sidebar
-            closeSidebarBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                foodSpotsSidebar.classList.remove('expanded');
-            });
-
-            // Sample food spots data (latitude, longitude, name)
-            const foodSpots = [
-                { id: 1, name: "Green Leaf Cafe", lat: 40.7128, lng: -74.0060, distance: 0.5, icon: "leaf" },
-                { id: 2, name: "Organic Bistro", lat: 40.7145, lng: -74.0082, distance: 1.2, icon: "utensils" },
-                { id: 3, name: "Vegan Delight", lat: 40.7110, lng: -74.0095, distance: 0.8, icon: "carrot" },
-                { id: 4, name: "Fresh Market", lat: 40.7150, lng: -74.0030, distance: 1.5, icon: "store" },
-                { id: 5, name: "Juice Bar", lat: 40.7135, lng: -74.0045, distance: 0.3, icon: "glass-whiskey" }
-            ];
-
-            // Preset user location (New York coordinates)
-            const userLocation = {
-                lat: 40.7128,
-                lng: -74.0060
-            };
-
-            // Initialize map
-            let map;
-            let markers = [];
-
-            function initMap() {
-                map = L.map('foodSpotsMap').setView([userLocation.lat, userLocation.lng], 14);
-                
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
-
-                // Add user location marker
-                L.marker([userLocation.lat, userLocation.lng], {
+            // Add each spot to map and list
+            spots.forEach(spot => {
+                // Add to map
+                const marker = L.marker([spot.lat, spot.lng], {
                     icon: L.divIcon({
-                        className: 'user-location-marker',
-                        html: '<i class="fas fa-map-pin" style="color: #6cbb23; font-size: 24px;"></i>',
+                        className: 'food-spot-marker',
+                        html: `<i class="fas fa-${spot.icon}" style="color: #fff; font-size: 16px; background: #6cbb23; padding: 8px; border-radius: 50%;"></i>`,
                         iconSize: [24, 24],
                         iconAnchor: [12, 24]
                     })
-                }).addTo(map)
-                .bindPopup('Your Location')
-                .openPopup();
-
-                // Add food spots to map and list
-                renderFoodSpots(foodSpots);
-            }
-
-            // Render food spots on map and in list
-            function renderFoodSpots(spots) {
-                // Clear existing markers
-                markers.forEach(marker => map.removeLayer(marker));
-                markers = [];
+                }).addTo(foodSpotsMap)
+                .bindPopup(spot.name);
                 
-                // Clear list
-                foodSpotsList.innerHTML = '';
+                foodSpotMarkers.push(marker);
 
-                // Add each spot to map and list
-                spots.forEach(spot => {
-                    // Add to map
-                    const marker = L.marker([spot.lat, spot.lng], {
-                        icon: L.divIcon({
-                            className: 'food-spot-marker',
-                            html: `<i class="fas fa-${spot.icon}" style="color: #fff; font-size: 16px; background: #6cbb23; padding: 8px; border-radius: 50%;"></i>`,
-                            iconSize: [24, 24],
-                            iconAnchor: [12, 24]
-                        })
-                    }).addTo(map)
-                    .bindPopup(spot.name);
-                    
-                    markers.push(marker);
-
-                    // Add to list
-                    const spotItem = document.createElement('div');
-                    spotItem.className = 'food-spot-item';
-                    spotItem.innerHTML = `
-                        <div class="food-spot-icon">
-                            <i class="fas fa-${spot.icon}"></i>
-                        </div>
-                        <div class="food-spot-info">
-                            <div class="food-spot-name">${spot.name}</div>
-                            <div class="food-spot-distance">${spot.distance} miles away</div>
-                        </div>
-                    `;
-                    
-                    spotItem.addEventListener('click', () => {
-                        map.setView([spot.lat, spot.lng], 16);
-                        marker.openPopup();
-                    });
-                    
-                    foodSpotsList.appendChild(spotItem);
+                // Add to list
+                const spotItem = document.createElement('div');
+                spotItem.className = 'food-spot-item';
+                spotItem.innerHTML = `
+                    <div class="food-spot-icon">
+                        <i class="fas fa-${spot.icon}"></i>
+                    </div>
+                    <div class="food-spot-info">
+                        <div class="food-spot-name">${spot.name}</div>
+                        <div class="food-spot-distance">${spot.distance} miles away</div>
+                    </div>
+                `;
+                
+                spotItem.addEventListener('click', () => {
+                    foodSpotsMap.setView([spot.lat, spot.lng], 16);
+                    marker.openPopup();
                 });
-            }
-
-            // Show all spots
-            showAllBtn.addEventListener('click', () => {
-                showAllBtn.classList.add('active');
-                nearMeBtn.classList.remove('active');
-                renderFoodSpots(foodSpots);
-            });
-
-            // Show spots sorted by distance
-            nearMeBtn.addEventListener('click', () => {
-                nearMeBtn.classList.add('active');
-                showAllBtn.classList.remove('active');
                 
-                // Sort spots by distance (already in the sample data)
-                const sortedSpots = [...foodSpots].sort((a, b) => a.distance - b.distance);
-                renderFoodSpots(sortedSpots);
+                foodSpotsList.appendChild(spotItem);
             });
+        }
 
-            // Initialize the map when sidebar is expanded
-            foodSpotsSidebar.addEventListener('click', function() {
-                if (this.classList.contains('expanded') && !map) {
-                    initMap();
-                }
-            });
+        // Show all spots
+        showAllBtn.addEventListener('click', () => {
+            showAllBtn.classList.add('active');
+            nearMeBtn.classList.remove('active');
+            renderFoodSpots(foodSpots);
+        });
 
-            // Close sidebar when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!foodSpotsSidebar.contains(e.target) )
-                {
-                    foodSpotsSidebar.classList.remove('expanded');
-                }
-            });
-        </script>
-    </body> 
-</html>Ś
+        // Show spots sorted by distance
+        nearMeBtn.addEventListener('click', () => {
+            nearMeBtn.classList.add('active');
+            showAllBtn.classList.remove('active');
+            
+            // Sort spots by distance (already in the sample data)
+            const sortedSpots = [...foodSpots].sort((a, b) => a.distance - b.distance);
+            renderFoodSpots(sortedSpots);
+        });
+
+        // Initialize the map when sidebar is expanded
+        foodSpotsSidebar.addEventListener('click', function() {
+            if (this.classList.contains('expanded') && !foodSpotsMap) {
+                initFoodSpotsMap();
+            }
+        });
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!foodSpotsSidebar.contains(e.target)) {
+                foodSpotsSidebar.classList.remove('expanded');
+            }
+        });
+
+        // Reel Finder Functionality
+        // Initialize reel finder map
+        const reelFinderMap = L.map('reelFinderMap').setView([20.5937, 78.9629], 4);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(reelFinderMap);
+
+        let currentMarker = null;
+
+        function updateLocationDisplay(content, type = 'default') {
+            const locationDisplay = document.getElementById('location-text');
+            const statusIndicator = '<span class="status-indicator ' + type + '"></span>';
+            
+            locationDisplay.className = 'location-display ' + type;
+            locationDisplay.innerHTML = statusIndicator + content;
+        }
+
+        function updateButtonState(isLoading) {
+            const button = document.getElementById('search-btn');
+            const input = document.getElementById('reel-url');
+            
+            if (isLoading) {
+                button.disabled = true;
+                button.innerHTML = '🔄 Searching...';
+                input.disabled = true;
+            } else {
+                button.disabled = false;
+                button.innerHTML = '🔍 Find Location';
+                input.disabled = false;
+            }
+        }
+
+        function addMarkerToMap(lat, lon, name, address) {
+            // Remove existing marker
+            if (currentMarker) {
+                reelFinderMap.removeLayer(currentMarker);
+            }
+            
+            // Add new marker
+            currentMarker = L.marker([lat, lon]).addTo(reelFinderMap);
+            
+            // Create popup content
+            const popupContent = `
+                <div style="text-align: center;">
+                    <h3 style="margin: 0 0 10px 0; color: #333;">${name}</h3>
+                    <p style="margin: 0; color: #666; font-size: 0.9rem;">${address}</p>
+                </div>
+            `;
+            
+            currentMarker.bindPopup(popupContent).openPopup();
+            
+            // Center map on location
+            reelFinderMap.setView([lat, lon], 15);
+        }
+
+        async function fetchLocation() {
+            const url = document.getElementById('reel-url').value.trim();
+            
+            if (!url) {
+                updateLocationDisplay('❗ Please enter an Instagram reel URL', 'error');
+                return;
+            }
+            
+            // Validate URL format
+            const instagramRegex = /instagram\.com\/(reel|p)\//;
+            if (!instagramRegex.test(url)) {
+                updateLocationDisplay('❗ Please enter a valid Instagram reel URL', 'error');
+                return;
+            }
+            
+            updateButtonState(true);
+            updateLocationDisplay('🔍 Analyzing Instagram reel...', 'loading');
+            
+            try {
+                // In a real implementation, this would call your backend API
+                // For demo purposes, we'll simulate a response with a timeout
+                setTimeout(() => {
+                    // Simulate successful response
+                    const mockResponse = {
+                        location_text: "Found: The Gourmet Burger Joint",
+                        address: "123 Foodie Street, New York, NY",
+                        lat: 40.7128,
+                        lon: -74.0060,
+                        maps_url: "https://www.google.com/maps?q=The+Gourmet+Burger+Joint"
+                    };
+                    
+                    let displayContent = mockResponse.location_text;
+                    
+                    // Add maps link if available
+                    if (mockResponse.maps_url) {
+                        displayContent += `<br><br><a href="${mockResponse.maps_url}" target="_blank" class="maps-link">🗺️ View on Google Maps</a>`;
+                    }
+                    
+                    // Add address if available and different from location text
+                    if (mockResponse.address && mockResponse.address !== mockResponse.location_text) {
+                        displayContent += `<br><small style="color: #666; font-style: italic;">📍 ${mockResponse.address}</small>`;
+                    }
+                    
+                    updateLocationDisplay(displayContent, 'success');
+                    
+                    // Add marker to map if coordinates are available
+                    if (mockResponse.lat && mockResponse.lon) {
+                        addMarkerToMap(mockResponse.lat, mockResponse.lon, 
+                                     mockResponse.location_text.replace('Found: ', '').replace('Found via geocoding: ', ''), 
+                                     mockResponse.address || 'Location found');
+                    } else {
+                        // Reset map view if no coordinates
+                        reelFinderMap.setView([20.5937, 78.9629], 4);
+                    }
+                    
+                    updateButtonState(false);
+                }, 2000);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                updateLocationDisplay('🚫 Network error. Please check your connection and try again.', 'error');
+                updateButtonState(false);
+            }
+        }
+        
+        // Allow Enter key to trigger search
+        document.getElementById('reel-url').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                fetchLocation();
+            }
+        });
+        
+        // Auto-focus on input when page loads
+        window.addEventListener('load', function() {
+            document.getElementById('reel-url').focus();
+        });
+    </script>
+</body>
+</html>
