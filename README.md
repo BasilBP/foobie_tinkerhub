@@ -70,9 +70,7 @@ diagram(https://drive.google.com/uc?export=view&id=1Q_sBFQ6yf50sZdv7tOwT6gfKYNrJ
 
 ---
 
-### Project Demo
-
-**Video:** ](https://drive.google.com/uc?export=view&id=1XjwDdq91wkLgvM6p8Uqv2ak1vOz9-mHs)
+**Video:** [Watch here](https://drive.google.com/file/d/1KfcO8Z2EegjrqkILEnwmx5CZA3L1AEaQ/view?usp=sharing)  
 
 *A quick walkthrough of uploading an Instagram Reel, processing it, and retrieving the location.*
 
