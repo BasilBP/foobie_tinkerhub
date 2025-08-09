@@ -39,11 +39,21 @@ For Software:
 Screenshots (Add at least 3)
 ![ss1](https://drive.google.com/uc?export=view&id=1YGO5Os-xu16JklGm-jidV7lP3o_A2G_6)
 
-![Screenshot1](Add screenshot 1 here with proper name) Add caption explaining what this shows
+![Screenshot2](https://drive.google.com/uc?export=view&id=15xDkLgl0cE8y2nP6e7NuciTz_xntdiLk)
 
-![Screenshot2](Add screenshot 2 here with proper name) Add caption explaining what this shows
+"Accurately identify and retrieve location details from any Instagram reel in seconds."
 
-![Screenshot3](Add screenshot 3 here with proper name) Add caption explaining what this shows
+![Screenshot3](https://drive.google.com/uc?export=view&id=10apaJ99SI22lNRme-VWCIkn3oOxWcEhf)
+
+Precise location details with instant map access for effortless navigation."
+
+![Screenshot4](https://drive.google.com/uc?export=view&id=1PTITWsOIepIqQ3BI67Q9VR-JqAULnU-3)
+find the nearest food spots from you 
+
+![Screenshot4](https://drive.google.com/uc?export=view&id=1YohLfm6gpeZKtuGaDUksjz-AFG3RtrSu)
+
+Diagrams
+![Workflow](Add your workflow/architecture diagram here) Add caption explaining your workflow
 
 Diagrams
 ![Workflow](Add your workflow/architecture diagram here) Add caption explaining your workflow
