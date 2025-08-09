@@ -64,8 +64,8 @@ Visit: [**ReelBites on ngrok**](https://a21f54cffa76.ngrok-free.app/)
 ---
 
 ### Diagrams
+![Screenshot 6](https://drive.google.com/uc?export=view&id=1C5kWQMVvM72aJaxvaxO_J39fiXguQ77D)
 *System workflow: User uploads → Flask API processes → AI & metadata extraction → Location mapping.*
-diagram(https://drive.google.com/uc?export=view&id=1C5kWQMVvM72aJaxvaxO_J39fiXguQ77D)
 
 
 
