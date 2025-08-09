@@ -35,7 +35,7 @@ We use captions and metadata in Instagram Reels to accurately pinpoint the locat
 ## Implementation
 
 ### Installation
-No installation needed — it’s fully hosted online.
+No installation needed — it’s fully hosted online. and if you WANT to run the code just run Python app.py 
 
 ### Run
 Visit: [**ReelBites on ngrok**](https://a21f54cffa76.ngrok-free.app/)  
@@ -77,10 +77,7 @@ Visit: [**ReelBites on ngrok**](https://a21f54cffa76.ngrok-free.app/)
 
 *A quick walkthrough of uploading an Instagram Reel, processing it, and retrieving the location.*
 
----
 
-## Additional Demos
-[Add any extra demo materials or links here.]
 
 ---
 
