@@ -1,72 +1,90 @@
-[Project Name] 🎯
-Basic Details
-Team Name: Impractical Coders
-Team Members
-Team Lead: Basil B Palathinkal - Muthoot Institute of Technology & Science
-Member 2: Meria Rachel Binu - Muthoot Institute of Technology & Science
-Project Description
-ReelBites instantly locates food spots from Instagram Reels. Upload any food video, and our AI analyzes captions and metadata to pinpoint the exact restaurant—turning foodie clips into real-world dining experiences. No more guessing—just tap,find,and eat. 
+# ReelBites 🎯
 
-The Problem (that doesn't exist)
-How many times have you saved a food reel thinking "I'll try this later"—only to forget where it was or drown it in a sea of saved videos? Scrolling through hundreds of reels to find that one dish is exhausting, and even then, half the time the location isn't tagged.
+## Basic Details
 
-The Solution (that nobody asked for)
-we use the captions and the metadata in the instagram reels to accurateley pinpoint the location and store the locations for future use especially when you need a quick bite
+### Team Name
+Impractical Coders
 
-Technical Details
-Technologies/Components Used
-For Software:
+### Team Members
+- **Team Lead:** Basil B Palathinkal – Muthoot Institute of Technology & Science  
+- **Member 2:** Meria Rachel Binu – Muthoot Institute of Technology & Science  
 
-HTML,CSS,Java Script,Python
-Flask ,SpaCy
-OS,Pathlib,sub Process
-Serp API, Google maps API
-    
-Implementation
-For Software:
-just paste the website 
+### Project Description
+ReelBites instantly locates food spots from Instagram Reels. Upload any food video, and our AI analyzes captions and metadata to pinpoint the exact restaurant — turning foodie clips into real-world dining experiences. No more guessing — just tap, find, and eat.
 
-Installation
-nothing here
+### The Problem (that doesn't exist)
+How many times have you saved a food reel thinking *"I'll try this later"* — only to forget where it was or drown it in a sea of saved videos? Scrolling through hundreds of reels to find that one dish is exhausting, and even then, half the time the location isn't tagged.
 
+### The Solution (that nobody asked for)
+We use captions and metadata in Instagram Reels to accurately pinpoint the location and store it for future use — perfect for when you need a quick bite and don’t want to waste time searching.
 
-Run
-https://a21f54cffa76.ngrok-free.app/
+---
 
-Project Documentation
-For Software:
+## Technical Details
 
-Screenshots (Add at least 3)
-![ss1](https://drive.google.com/uc?export=view&id=1YGO5Os-xu16JklGm-jidV7lP3o_A2G_6)
+### Technologies / Components Used
 
-![Screenshot2](https://drive.google.com/uc?export=view&id=15xDkLgl0cE8y2nP6e7NuciTz_xntdiLk)
+**For Software:**
+- **Languages:** HTML, CSS, JavaScript, Python  
+- **Frameworks & Libraries:** Flask, SpaCy  
+- **Python Modules:** OS, Pathlib, subprocess  
+- **APIs:** SerpAPI, Google Maps API  
 
-"Accurately identify and retrieve location details from any Instagram reel in seconds."
+---
 
-![Descriptive Alt Text](https://drive.google.com/uc?export=view&id=10apaJ99SI22lNRme-VWCIkn3oOxWcEhf)
+## Implementation
 
-Precise location details with instant map access for effortless navigation."
+### Installation
+No installation needed — it’s fully hosted online.
 
-![Screenshot4](https://drive.google.com/uc?export=view&id=1PTITWsOIepIqQ3BI67Q9VR-JqAULnU-3)
-find the nearest food spots from you 
+### Run
+Visit: [**ReelBites on ngrok**](https://a21f54cffa76.ngrok-free.app/)  
 
-![Screenshot4](https://drive.google.com/uc?export=view&id=1YohLfm6gpeZKtuGaDUksjz-AFG3RtrSu)
+---
 
-Diagrams
-![Workflow](Add your workflow/architecture diagram here) Add caption explaining your workflow
+## Project Documentation
 
-Diagrams
-![Workflow](Add your workflow/architecture diagram here) Add caption explaining your workflow
+### Screenshots
 
+![Screenshot 1](https://drive.google.com/uc?export=view&id=1YGO5Os-xu16JklGm-jidV7lP3o_A2G_6)  
+*Homepage interface for uploading and analyzing Instagram Reels.*
 
-Project Demo
-Video
-[Add your demo video link here] Explain what the video demonstrates
+![Screenshot 2](https://drive.google.com/uc?export=view&id=15xDkLgl0cE8y2nP6e7NuciTz_xntdiLk)  
+*Accurately identify and retrieve location details from any Instagram Reel in seconds.*
 
-Additional Demos
-[Add any extra demo materials/links]
+![Screenshot 3](https://drive.google.com/uc?export=view&id=10apaJ99SI22lNRme-VWCIkn3oOxWcEhf)  
+*Precise location details with instant map access for effortless navigation.*
 
-Team Contributions
-Basil B Palathinkal: Back-end
-Meria Rachel Binu: Front-end
-Made with ❤️ at TinkerHub Useless Projects
+![Screenshot 4](https://drive.google.com/uc?export=view&id=1PTITWsOIepIqQ3BI67Q9VR-JqAULnU-3)  
+*Find the nearest food spots to you instantly.*
+
+![Screenshot 5](https://drive.google.com/uc?export=view&id=1YohLfm6gpeZKtuGaDUksjz-AFG3RtrSu)  
+*Clean and minimal results interface for quick browsing.*
+
+---
+
+### Diagrams
+![Workflow](Add your workflow/architecture diagram here)  
+*System workflow: User uploads → Flask API processes → AI & metadata extraction → Location mapping.*
+
+---
+
+### Project Demo
+
+**Video:** [Add your demo video link here]  
+*A quick walkthrough of uploading an Instagram Reel, processing it, and retrieving the location.*
+
+---
+
+## Additional Demos
+[Add any extra demo materials or links here.]
+
+---
+
+## Team Contributions
+- **Basil B Palathinkal:** Backend development (Flask API, AI processing, integration with APIs)  
+- **Meria Rachel Binu:** Frontend development (UI, UX, styling, user interactions)  
+
+---
+
+**Made with ❤️ at TinkerHub Useless Projects**
