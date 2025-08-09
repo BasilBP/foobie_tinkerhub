@@ -70,10 +70,8 @@ Visit: [**ReelBites on ngrok**](https://a21f54cffa76.ngrok-free.app/)
 
 ### Project Demo
 
-**Video:** <video width="640" height="480" controls>
-  <source src="https://drive.google.com/uc?export=preview&id=YOUR_FILE_ID" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+**Video:** ](https://drive.google.com/uc?export=view&id=1XjwDdq91wkLgvM6p8Uqv2ak1vOz9-mHs)
+
 *A quick walkthrough of uploading an Instagram Reel, processing it, and retrieving the location.*
 
 ---
