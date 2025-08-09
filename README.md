@@ -43,7 +43,7 @@ Screenshots (Add at least 3)
 
 "Accurately identify and retrieve location details from any Instagram reel in seconds."
 
-![Screenshot3](https://drive.google.com/uc?export=view&id=10apaJ99SI22lNRme-VWCIkn3oOxWcEhf)
+![Screenshot3]([https://drive.google.com/uc?export=view&id=10apaJ99SI22lNRme-VWCIkn3oOxWcEhf](https://drive.google.com/file/d/10apaJ99SI22lNRme-VWCIkn3oOxWcEhf/view?usp=sharing))
 
 Precise location details with instant map access for effortless navigation."
 
