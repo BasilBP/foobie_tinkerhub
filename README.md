@@ -1,15 +1,14 @@
 [Project Name] 🎯
 Basic Details
-Team Name: [Name]
+Team Name: Impractical Coders
 Team Members
-Team Lead: [Name] - [College]
-Member 2: [Name] - [College]
-Member 3: [Name] - [College]
+Team Lead: Basil B Palathinkal - Muthoot Institute of Technology & Science
+Member 2: Meria Rachel Binu - Muthoot Institute of Technology & Science
 Project Description
-[2-3 lines about what your project does]
+ReelBites instantly locates food spots from Instagram Reels. Upload any food video, and our AI analyzes captions and metadata to pinpoint the exact restaurant—turning foodie clips into real-world dining experiences. No more guessing—just tap,find,and eat. 
 
 The Problem (that doesn't exist)
-[What ridiculous problem are you solving?]
+How many times have you saved a food reel thinking "I'll try this later"—only to forget where it was or drown it in a sea of saved videos? Scrolling through hundreds of reels to find that one dish is exhausting, and even then, half the time the location isn't tagged.
 
 The Solution (that nobody asked for)
 [How are you solving it? Keep it fun!]
@@ -18,28 +17,27 @@ Technical Details
 Technologies/Components Used
 For Software:
 
-[Languages used]
-[Frameworks used]
-[Libraries used]
-[Tools used]
-For Hardware:
-
-[List main components]
-[List specifications]
-[List tools required]
+HTML,CSS,Java Script,Python
+Flask ,SpaCy
+OS,Pathlib,sub Process
+Serp API, Google maps API
+    
 Implementation
 For Software:
 
 Installation
 [commands]
 
+
 Run
-[commands]
+https://a21f54cffa76.ngrok-free.app/
 
 Project Documentation
 For Software:
 
 Screenshots (Add at least 3)
+![ss1](https://drive.google.com/uc?export=view&id=1YGO5Os-xu16JklGm-jidV7lP3o_A2G_6)
+
 ![Screenshot1](Add screenshot 1 here with proper name) Add caption explaining what this shows
 
 ![Screenshot2](Add screenshot 2 here with proper name) Add caption explaining what this shows
@@ -49,19 +47,6 @@ Screenshots (Add at least 3)
 Diagrams
 ![Workflow](Add your workflow/architecture diagram here) Add caption explaining your workflow
 
-For Hardware:
-
-Schematic & Circuit
-![Circuit](Add your circuit diagram here) Add caption explaining connections
-
-![Schematic](Add your schematic diagram here) Add caption explaining the schematic
-
-Build Photos
-![Components](Add photo of your components here) List out all components shown
-
-![Build](Add photos of build process here) Explain the build steps
-
-![Final](Add photo of final product here) Explain the final build
 
 Project Demo
 Video
@@ -71,7 +56,6 @@ Additional Demos
 [Add any extra demo materials/links]
 
 Team Contributions
-[Name 1]: [Specific contributions]
-[Name 2]: [Specific contributions]
-[Name 3]: [Specific contributions]
+Basil B Palathinkal: Back-end
+Meria Rachel Binu: Front-end
 Made with ❤️ at TinkerHub Useless Projects
