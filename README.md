@@ -11,7 +11,7 @@ The Problem (that doesn't exist)
 How many times have you saved a food reel thinking "I'll try this later"—only to forget where it was or drown it in a sea of saved videos? Scrolling through hundreds of reels to find that one dish is exhausting, and even then, half the time the location isn't tagged.
 
 The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+we use the captions and the metadata in the instagram reels to accurateley pinpoint the location and store the locations for future use especially when you need a quick bite
 
 Technical Details
 Technologies/Components Used
@@ -24,9 +24,10 @@ Serp API, Google maps API
     
 Implementation
 For Software:
+just paste the website 
 
 Installation
-[commands]
+nothing here
 
 
 Run
